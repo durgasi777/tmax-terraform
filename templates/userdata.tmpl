@@ -1,0 +1,7 @@
+#!/bin/bash
+yum -y update
+yum -y install nginx
+INSTANCE_ID=`curl -l http://169.254.169.254/latest/meta-data/instance-id`
+EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+echo "This reponse is from Instance-ID $INSTANCE_ID hosted in $EC2_AVAIL_ZONE" > /usr/share/nginx/html/index.html
+service nginx start
